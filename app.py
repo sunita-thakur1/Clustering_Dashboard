@@ -8,7 +8,7 @@ from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
 from scipy.cluster.hierarchy import linkage, dendrogram
 
 st.set_page_config(layout="wide")
-st.title("🧠 Clustering Dashboard (No Scaling)")
+st.title("🧠 Clustering Dashboard")
 
 # Upload dataset
 uploaded_file = st.file_uploader("📥 Upload your CSV file", type=["csv"])
