@@ -13,7 +13,7 @@ st.title("🧠 Clustering Dashboard")
 # App Description
 st.markdown("""
 Welcome to the **Clustering Dashboard**! This app allows you to upload your dataset, apply different clustering algorithms, and visualize the results interactively.
-You can:
+Description:
 - Upload your own dataset (CSV format).
 - Select numeric features for clustering.
 - Apply **Standard Scaling** to normalize the features.
