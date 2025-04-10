@@ -13,6 +13,11 @@ st.title("🧠 Clustering Dashboard")
 # App Description
 st.markdown("""
 Welcome to the **Clustering Dashboard**! This app allows you to upload your dataset, apply different clustering algorithms, and visualize the results interactively.
+### Key Features:
+- **Scaling** of features using StandardScaler.
+- **PCA** for dimensionality reduction (2D visualization).
+- **Interactive Clustering** with K-Means, DBSCAN, and Hierarchical Clustering.
+- **Feature Contributions** displayed in PCA components to interpret the results.
 ### Description:
 - Upload your own dataset (CSV format).
 - Select numeric features for clustering.
@@ -20,11 +25,6 @@ Welcome to the **Clustering Dashboard**! This app allows you to upload your data
 - Use **PCA** to reduce dimensionality for easier visualization.
 - Run **K-Means**, **DBSCAN**, and **Hierarchical Clustering** algorithms.
 - Visualize clusters with scatter plots, dendrograms, and feature importance from PCA.  
-### Key Features:
-- **Scaling** of features using StandardScaler.
-- **PCA** for dimensionality reduction (2D visualization).
-- **Interactive Clustering** with K-Means, DBSCAN, and Hierarchical Clustering.
-- **Feature Contributions** displayed in PCA components to interpret the results.
 """)
 # Upload dataset
 uploaded_file = st.file_uploader("📥 Upload your CSV file", type=["csv"])
