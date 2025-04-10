@@ -18,6 +18,8 @@ if uploaded_file:
 
     st.write("### 📄 Raw Data Preview")
     st.dataframe(df.head())
+    st.write("### Summary Statistics")
+    st.write(df.describe())
 
     # Encode categorical columns
     label_encoder = LabelEncoder()
