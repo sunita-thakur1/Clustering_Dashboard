@@ -19,7 +19,7 @@ You can:
 - Apply **Standard Scaling** to normalize the features.
 - Use **PCA** to reduce dimensionality for easier visualization.
 - Run **K-Means**, **DBSCAN**, and **Hierarchical Clustering** algorithms.
-- Visualize clusters with scatter plots, dendrograms, and feature importance from PCA.
+- Visualize clusters with scatter plots, dendrograms, and feature importance from PCA.  
 ### Key Features:
 - **Scaling** of features using StandardScaler.
 - **PCA** for dimensionality reduction (2D visualization).
