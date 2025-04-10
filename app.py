@@ -132,6 +132,7 @@ if uploaded_file:
         # Show labeled data
         st.subheader("📊 Clustered Data Preview")
         st.dataframe(df.head())
+        st.subheader("📊 Clustered Data")
         st.write(df)
 
     else:
