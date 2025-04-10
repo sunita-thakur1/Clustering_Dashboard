@@ -132,7 +132,7 @@ if uploaded_file:
         # Show labeled data
         st.subheader("📊 Clustered Data Preview")
         st.dataframe(df.head())
-        st.write(print(df))
+        st.write(df)
 
     else:
         st.warning("Please select at least two numeric features for clustering.")
