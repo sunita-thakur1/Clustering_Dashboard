@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
 from scipy.cluster.hierarchy import linkage, dendrogram
 
@@ -28,7 +29,41 @@ if uploaded_file:
     selected_features = st.multiselect("🔧 Select features for clustering:", numeric_cols, default=numeric_cols[:2])
 
     if len(selected_features) >= 2:
-        data_for_clustering = df[selected_features].values
+        # Scale data
+        scaler = StandardScaler()
+        scaled_data = scaler.fit_transform(df[selected_features])
+
+        # Apply PCA
+        pca = PCA(n_components=2)
+        pca_data = pca.fit_transform(scaled_data)
+        df["PCA1"] = pca_data[:, 0]
+        df["PCA2"] = pca_data[:, 1]
+
+        # Show PCA feature contributions
+        st.subheader("🧬 PCA Feature Contributions")
+
+        pca_components_df = pd.DataFrame(
+            pca.components_.T,
+            columns=["PC1", "PC2"],
+            index=selected_features
+        )
+
+        st.write("### 🔍 PCA Loadings Table")
+        st.dataframe(pca_components_df.style.format("{:.2f}"))
+
+        st.write("### 📊 PCA Feature Importance Bar Chart")
+        fig_pca, ax_pca = plt.subplots(figsize=(10, 5))
+        pca_components_df.plot(kind="bar", ax=ax_pca)
+        ax_pca.set_title("Feature Contributions to Principal Components")
+        ax_pca.set_ylabel("Loading Weight")
+        ax_pca.set_xlabel("Features")
+        ax_pca.axhline(0, color='gray', linewidth=0.8)
+        plt.xticks(rotation=45)
+        st.pyplot(fig_pca)
+
+        # PCA toggle
+        use_pca = st.checkbox("🧪 Use PCA-transformed data for clustering and visualization", value=True)
+        data_for_clustering = pca_data if use_pca else scaled_data
 
         col1, col2 = st.columns(2)
 
@@ -44,8 +79,8 @@ if uploaded_file:
 
             fig1, ax1 = plt.subplots()
             sns.scatterplot(
-                x=df[selected_features[0]],
-                y=df[selected_features[1]],
+                x=df["PCA1"] if use_pca else df[selected_features[0]],
+                y=df["PCA2"] if use_pca else df[selected_features[1]],
                 hue=df["KMeans_Cluster"],
                 palette="viridis",
                 ax=ax1
@@ -66,8 +101,8 @@ if uploaded_file:
 
             fig2, ax2 = plt.subplots()
             sns.scatterplot(
-                x=df[selected_features[0]],
-                y=df[selected_features[1]],
+                x=df["PCA1"] if use_pca else df[selected_features[0]],
+                y=df["PCA2"] if use_pca else df[selected_features[1]],
                 hue=df["DBSCAN_Cluster"],
                 palette="plasma",
                 ax=ax2
